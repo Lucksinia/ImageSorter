@@ -12,7 +12,7 @@ def difference(baseimg: Image, compared: Image) -> bool:
         return False
 
 
-def check_cmp(path: Path):
+def check_cmp(path: Path) -> None:
     to_delete = set()  # final list for files that needed to be deleted
     to_skip = set()
     gen = list(path.iterdir())
@@ -20,7 +20,6 @@ def check_cmp(path: Path):
         img = Image.open(gen[file])
         subgen = gen[file + 1 :]
         for second_file in subgen:
-            # print(f"checking file @{file} with: {second_file}")
             img2 = Image.open(second_file)
             cond2 = img.size == img2.size and img.mode == img2.mode
             cond3 = second_file not in to_delete and second_file not in to_skip

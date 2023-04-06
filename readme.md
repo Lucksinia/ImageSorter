@@ -12,12 +12,13 @@ You don't even know which part of your collection?
 ## How to guide ##
 
 As of release 0.0.1, there is no cli-interface ___YET.___
-So here is 4 simple steps to start:
+So here is __5__ simple steps to start:
 
 1. Install latest _Python_ version.
-2. _*Optional_.Activate virtual enviroment for next steps by using ```python -m venv .venv``` and then ```.venv/Scripts/Activate``` or, by other means.
+2. _*Optional_. Activate virtual enviroment for next steps by using ```python -m venv .venv``` and then ```.venv/Scripts/Activate``` or, by other means.
 3. By ```pip install -r req.txt``` install required python modules.
-4. Run required module by either using IDE or ```python path/to/desired/tool.py``` in command line.
+4. Change `directory = Path("Path\to\foulder")` to foulder in which you whant this script to work.
+5. Run required module by either using IDE or ```python path/to/desired/tool.py``` in command line.
 
 ---
 
@@ -36,4 +37,4 @@ So here is 4 simple steps to start:
 ### This project would not have seen the light if not for ###
 
 1. My tendency to start new project when I've gotten sick.
-2.[Viyachikhh](https://github.com/Viyachikhh), without whose help [comparator](comparator.py) would've been ___EVEN SLOWER___.
+2. [Viyachikhh](https://github.com/Viyachikhh), without whose help [comparator](comparator.py) would've been ___EVEN SLOWER___.
