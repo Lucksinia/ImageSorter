@@ -1,7 +1,7 @@
 from pathlib import Path
 from PIL import Image
 
-directory = Path(r"Path\to\foulder")
+directory = Path(r"path:\to\foulder")
 target_dir = directory
 to_save = []
 to_delete = []

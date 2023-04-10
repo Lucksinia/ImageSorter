@@ -1,6 +1,6 @@
 from pathlib import Path
 
-directory = Path(r"Path\to\foulder")
+directory = Path(r"path:\to\foulder")
 
 for i, file in enumerate(directory.iterdir()):
     suff = file.suffix
