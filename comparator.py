@@ -3,7 +3,6 @@ from PIL import Image
 import numpy as np
 
 
-@np.vectorize
 def difference(baseimg: Image, compared: Image) -> bool:
     try:
         np1 = np.asarray(baseimg)
