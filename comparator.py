@@ -29,7 +29,7 @@ def check_cmp(path: Path) -> None:
                     to_skip.add(second_file)
             img2.close()
         img.close()
-        print(f"worked file: @{file} {gen[file]}")
+        # print(f"worked file: @{file} {gen[file]}")
         to_skip.add(file)
     print(f"There is {len(to_delete)} files that are broken or a copy of another")
     print("Proseed?(y/n)")
