@@ -14,12 +14,18 @@ for i, file in enumerate(target_dir.iterdir()):
     else:
         to_delete.append(file)
     img.close()
-print(f"There is {len(to_delete)} files that not even HD")
-print("Proseed?(y/n)")
-if not input("~> ").lower().startswith("y"):
-    quit()
+
+
+if not len(to_delete):
+    print("There is no files that are not at least HD")
 else:
-    lst = []
-    for i, filepath in enumerate(to_delete):
-        lst.append(i)
-        filepath.unlink()
+    print(f"There is {len(to_delete)} files that not even HD")
+    print("Proseed?(y/n)")
+    if not input("~> ").lower().startswith("y"):
+        print("Good bye then!")
+        quit()
+    else:
+        lst = []
+        for i, filepath in enumerate(to_delete):
+            lst.append(i)
+            filepath.unlink()

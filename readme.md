@@ -7,18 +7,18 @@ You don't even know which part of your collection?
 
 - [cleaner](cleaner.py) - to delete all old stuff (_currently only saving HD and bigger resolutions_)
 - [comparator](comparator.py) - to delete all copies of each file and corrupted ones.
-- [re-namer](renamer.py) - to rename by ```0+number+file format``` each and every file.
+- [re-namer](renamer.py) - to rename by `0 + number + .file_format` each and every file.
 
-## How to guide ##
+## How-to guide ##
 
 As of release 0.0.1, there is no cli-interface ___YET.___
 So here is __5__ simple steps to start:
 
 1. Install latest _Python_ version.
-2. _*Optional_. Activate virtual enviroment for next steps by using ```python -m venv .venv``` and then ```.venv/Scripts/Activate``` or, by other means.
-3. By ```pip install -r req.txt``` install required python modules.
+2. _*Optional_. Activate virtual enviroment for next steps by using `python -m venv .venv` and then `.venv/Scripts/Activate` or, by other means.
+3. By `pip install -r req.txt` install required python modules.
 4. Change `directory = Path("Path\to\foulder")` to foulder in which you whant this script to work.
-5. Run required module by either using IDE or ```python path/to/desired/tool.py``` in command line.
+5. Run required module by either using IDE or `python path/to/desired/tool.py` in command line.
 
 ---
 
@@ -36,5 +36,5 @@ So here is __5__ simple steps to start:
 
 ### This project would not have seen the light if not for ###
 
-1. My tendency to start new project when I've gotten sick.
-2. [Viyachikhh](https://github.com/Viyachikhh), without whose help [comparator](comparator.py) would've been ___EVEN SLOWER___.
+1. My tendency to start new project whenewer I've gotten sick.
+2. [Viyachikhh](https://github.com/Viyachikhh), without whose help [comparator](comparator.py) would've been __EVEN SLOWER__.

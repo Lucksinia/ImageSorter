@@ -31,14 +31,18 @@ def check_cmp(path: Path) -> None:
         img.close()
         # print(f"worked file: @{file} {gen[file]}")
         to_skip.add(file)
-    print(f"There is {len(to_delete)} files that are broken or a copy of another")
-    print("Proseed?(y/n)")
-    if not input("~> ").lower().startswith("y"):
-        quit()
+
+    if not len(to_delete):
+        print("There is no files that are copies or broken")
     else:
-        for filepath in to_delete:
-            filepath.unlink()
+        print(f"There is {len(to_delete)} files that are broken or a copy of another")
+        print("Proseed?(y/n)")
+        if not input("~> ").lower().startswith("y"):
+            quit()
+        else:
+            for filepath in to_delete:
+                filepath.unlink()
 
 
-directory = Path(r"path:\to\foulder")
+directory = Path(r"C:\Python_Projects\ImageSorter\test")
 check_cmp(directory)
