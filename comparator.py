@@ -12,7 +12,7 @@ def difference(baseimg: Image, compared: Image) -> bool:
         return False
 
 
-def check_cmp(path: Path) -> None:
+def compare(path: Path) -> None:
     to_delete = set()  # final list for files that needed to be deleted
     to_skip = set()
     gen = list(path.iterdir())
@@ -45,4 +45,4 @@ def check_cmp(path: Path) -> None:
 
 
 directory = Path(r"C:\Python_Projects\ImageSorter\test")
-check_cmp(directory)
+compare(directory)
