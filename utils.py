@@ -1,16 +1,12 @@
 from pathlib import Path
 from PIL import Image
 import numpy as np
-import click
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.parse_args()
 
 
-@click.group()
-def run():
-    pass
-
-
-@click.command()
-@click.option("-c", "--clear", type=click.Path(exists=True, path_type=Path()))
 def clear(path: Path) -> None:
     target_dir = path
     to_save = []
@@ -49,8 +45,6 @@ def difference(baseimg: Image, compared: Image) -> bool:
         return False
 
 
-@click.command()
-@click.option("-p", "--process", type=click.Path(exists=True, path_type=Path()))
 def compare(path: Path) -> None:
     to_delete = set()  # final list for files that needed to be deleted
     to_skip = set()
@@ -83,8 +77,6 @@ def compare(path: Path) -> None:
                 filepath.unlink()
 
 
-@click.command()
-@click.option("-r", "--rename", type=click.Path(exists=True, path_type=Path()))
 def rename(path: Path) -> None:
     for i, file in enumerate(path.iterdir()):
         suff = file.suffix
@@ -97,12 +89,3 @@ def rename(path: Path) -> None:
             file.rename(filepath)
         except:
             continue
-
-
-run.add_command(clear())
-run.add_command(compare())
-run.add_command(rename())
-
-
-if __name__ == "__main__":
-    run()
