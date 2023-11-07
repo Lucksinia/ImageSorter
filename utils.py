@@ -3,11 +3,8 @@ from PIL import Image
 import numpy as np
 import argparse
 
-parser = argparse.ArgumentParser()
-parser.parse_args()
 
-
-def clear(path: Path) -> None:
+def cleaning(path: Path) -> None:
     target_dir = path
     to_save = []
     to_delete = []
@@ -45,7 +42,7 @@ def difference(baseimg: Image, compared: Image) -> bool:
         return False
 
 
-def compare(path: Path) -> None:
+def matching(path: Path) -> None:
     to_delete = set()  # final list for files that needed to be deleted
     to_skip = set()
     gen = list(path.iterdir())
@@ -77,7 +74,7 @@ def compare(path: Path) -> None:
                 filepath.unlink()
 
 
-def rename(path: Path) -> None:
+def renaming(path: Path) -> None:
     for i, file in enumerate(path.iterdir()):
         suff = file.suffix
         new_name = str(file)
@@ -89,3 +86,33 @@ def rename(path: Path) -> None:
             file.rename(filepath)
         except:
             continue
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "path",
+        type=Path,
+        nargs="?",
+        help="Path to directory",
+        default=Path.cwd(),
+    )
+    parser.add_argument(
+        "-c, -clean",
+        action="store_true",
+        help="Check for every file that has less then HD quality, then delete them",
+    )
+    parser.add_argument(
+        "-m, -match",
+        action="store_true",
+        help="Matxh every file to find duplicates and/or broken files, then delete them",
+    )
+    args = parser.parse_args()
+    if args.clean:
+        cleaning(args.path)
+    elif args.match:
+        matching(args.path)
+
+
+if __name__ == "__main__":
+    main()
