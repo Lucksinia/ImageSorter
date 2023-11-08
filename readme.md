@@ -3,22 +3,16 @@
 Are you tired to compare your _homework_ that you collected over literal __decades__ ?
 You don't even know which part of your collection?
 
-## Here some basic tools for sorting it at your leisure ##
+## Here's  a basic tool for sorting it at your leisure(How-to guide) ##
 
-- [cleaner](cleaner.py) - to delete all old stuff (_currently only saving HD and bigger resolutions_)
-- [comparator](comparator.py) - to delete all copies of each file and corrupted ones.
-- [re-namer](renamer.py) - to rename by `0 + number + .file_format` each and every file.
-
-## How-to guide ##
-
-As of release 0.0.1, there is no cli-interface ___YET.___
+As of _"release"_ 0.5.0, there is buggy CLI interface
 So here is __5__ simple steps to start:
 
 1. Install latest _Python_ version.
 2. _*Optional_. Activate virtual enviroment for next steps by using `python -m venv .venv` and then `.venv/Scripts/Activate` or, by other means.
 3. By `pip install -r req.txt` install required python modules.
-4. Change `directory = Path("Path\to\foulder")` to foulder in which you whant this script to work.
-5. Run required module by either using IDE or `python path/to/desired/tool.py` in command line.
+4. In terminal use `python ImageSorter.py -[OPTION] ~/path/to/directory`.
+5. To check on all options, either start this script without option, or use -h/--help.
 
 ---
 
@@ -31,7 +25,7 @@ So here is __5__ simple steps to start:
 ### Basic roadmap ###
 
 - [x] - basic functionality.
-- [ ] - cli Interface.
+- [x] - cli Interface.(_partial_)
 - [ ] - further optimizations. ~~(using numpy to compare arrays is not an optimization)~~
 
 ### This project would not have seen the light if not for ###
