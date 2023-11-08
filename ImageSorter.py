@@ -98,20 +98,31 @@ def main():
         default=Path.cwd(),
     )
     parser.add_argument(
-        "-c, -clean",
+        "-c",
+        "--clean",
         action="store_true",
         help="Check for every file that has less then HD quality, then delete them",
     )
     parser.add_argument(
-        "-m, -match",
+        "-m",
+        "--match",
         action="store_true",
-        help="Matxh every file to find duplicates and/or broken files, then delete them",
+        help="Match every file to find duplicates and/or broken files, then delete them",
+    )
+    parser.add_argument(
+        "-r",
+        "--rename",
+        action="store_true",
+        help="Rename all files by {0 + number + .file_format} template",
     )
     args = parser.parse_args()
+    print(args)
     if args.clean:
         cleaning(args.path)
     elif args.match:
         matching(args.path)
+    elif args.rename:
+        renaming(args.path)
 
 
 if __name__ == "__main__":
