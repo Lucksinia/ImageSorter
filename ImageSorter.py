@@ -119,9 +119,9 @@ def main():
     print(args)
     if args.clean:
         cleaning(args.path)
-    elif args.match:
+    if args.match:
         matching(args.path)
-    elif args.rename:
+    if args.rename:
         renaming(args.path)
 
 
