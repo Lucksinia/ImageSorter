@@ -31,4 +31,4 @@ So here is __5__ simple steps to start:
 ### This project would not have seen the light if not for ###
 
 1. My tendency to start new project whenewer I've gotten sick.
-2. [Viyachikhh](https://github.com/Viyachikhh), without whose help [comparator](comparator.py) would've been __EVEN SLOWER__.
+2. [Viyachikhh](https://github.com/Viyachikhh), without whose help comparing would've been __EVEN SLOWER__.
