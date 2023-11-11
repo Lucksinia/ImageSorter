@@ -34,6 +34,12 @@ def cleaning(path: Path) -> None:
 
 
 def difference(baseimg: Image, compared: Image) -> bool:
+    """Function to compare difference in data between two images.
+
+    :param Image baseimg: Pillow Image that is compared with others
+    :param Image compared: Pillow image that is compared to the base one.
+    :return bool: if equal return False
+    """
     try:
         np1 = np.asarray(baseimg)
         np2 = np.asarray(compared)
@@ -75,6 +81,10 @@ def matching(path: Path) -> None:
 
 
 def renaming(path: Path) -> None:
+    """Function that renames all files as a `0 + number of file + file suffix`
+
+    :param Path path: Path to the worked on directory
+    """
     for i, file in enumerate(path.iterdir()):
         suff = file.suffix
         new_name = str(file)
@@ -89,6 +99,7 @@ def renaming(path: Path) -> None:
 
 
 def main():
+    """Cli interface for this Sorter"""
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "path",
