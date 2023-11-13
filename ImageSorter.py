@@ -5,13 +5,17 @@ import argparse
 
 
 def cleaning(path: Path) -> None:
+    """Function that finds all files in given directory and prompts to delete them
+       if they are at leas HD quality
+
+    :param Path path: Path to the worked on directory
+    """
     target_dir = path
     to_save = []
     to_delete = []
     for i, file in enumerate(target_dir.iterdir()):
-        img = Image.open(file)  # TODO: find a way to not open images
-        w, h = img.size
-        amount = w * h
+        img = Image.open(file)  # TODO: find a way to not open images(fully)
+        amount = img.size[0] * img.size[1]
         if amount >= 921600:  # minimal HD px amount
             to_save.append(file)
         else:
@@ -21,7 +25,7 @@ def cleaning(path: Path) -> None:
     if not len(to_delete):
         print("There is no files that are not at least HD")
     else:
-        print(f"There is {len(to_delete)} files that not even HD")
+        print(f"There is {len(to_delete)} files that not at least HD")
         print("Proseed?(y/n)")
         if not input("~> ").lower().startswith("y"):
             print("Good bye then!")
@@ -49,7 +53,11 @@ def difference(baseimg: Image, compared: Image) -> bool:
 
 
 def matching(path: Path) -> None:
-    to_delete = set()  # final list for files that needed to be deleted
+    """Function that contains matching logic for files.
+
+    :param Path path: Path to the worked on directory
+    """
+    to_delete = set()  # final set for files that needed to be deleted
     to_skip = set()
     gen = list(path.iterdir())
     for file in range(len(gen)):
@@ -85,6 +93,7 @@ def renaming(path: Path) -> None:
 
     :param Path path: Path to the worked on directory
     """
+    # TODO: Implement naming template change
     for i, file in enumerate(path.iterdir()):
         suff = file.suffix
         new_name = str(file)
@@ -100,7 +109,7 @@ def renaming(path: Path) -> None:
 
 def main():
     """Cli interface for this Sorter"""
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog="image-sort")
     parser.add_argument(
         "path",
         type=Path,
@@ -112,22 +121,21 @@ def main():
         "-c",
         "--clean",
         action="store_true",
-        help="Check for every file that has less then HD quality, then delete them",
+        help="check for every file that has less then HD quality, then delete them",
     )
     parser.add_argument(
         "-m",
         "--match",
         action="store_true",
-        help="Match every file to find duplicates and/or broken files, then delete them",
+        help="match every file to find duplicates and/or broken files, then delete them",
     )
     parser.add_argument(
         "-r",
         "--rename",
         action="store_true",
-        help="Rename all files by {0 + number + .file_format} template",
+        help="rename all files by {0 + number + .file_format} template",
     )
     args = parser.parse_args()
-    print(args)
     if args.clean:
         cleaning(args.path)
     if args.match:
