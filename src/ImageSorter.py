@@ -1,7 +1,11 @@
 from pathlib import Path
-from PIL import Image
+from PIL import Image, ImageFile
 import numpy as np
 import argparse
+from numba import njit
+
+# for specific images, whoose bytes are correct, but one part of data is broken
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 def cleaning(path: Path) -> None:
@@ -14,13 +18,12 @@ def cleaning(path: Path) -> None:
     to_save = []
     to_delete = []
     for i, file in enumerate(target_dir.iterdir()):
-        img = Image.open(file)  # TODO: find a way to not open images(fully)
-        amount = img.size[0] * img.size[1]
-        if amount >= 921600:  # minimal HD px amount
-            to_save.append(file)
-        else:
-            to_delete.append(file)
-        img.close()
+        with Image.open(file) as img:  # TODO: find a way to not open images(fully)
+            amount = img.size[0] * img.size[1]
+            if amount >= 921600:  # minimal HD px amount
+                to_save.append(file)
+            else:
+                to_delete.append(file)
 
     if not len(to_delete):
         print("There is no files that are not at least HD")
@@ -37,6 +40,7 @@ def cleaning(path: Path) -> None:
                 filepath.unlink()
 
 
+# @njit
 def difference(baseimg: Image, compared: Image) -> bool:
     """Function to compare difference in data between two images.
 
@@ -61,19 +65,17 @@ def matching(path: Path) -> None:
     to_skip = set()
     gen = list(path.iterdir())
     for file in range(len(gen)):
-        img = Image.open(gen[file])
-        subgen = gen[file + 1 :]
-        for second_file in subgen:
-            img2 = Image.open(second_file)
-            cond2 = img.size == img2.size and img.mode == img2.mode
-            cond3 = second_file not in to_delete and second_file not in to_skip
-            if cond2 and cond3:  # if they are the same dimensions
-                if difference(img, img2):  # if their bytearrays are NOT equal
-                    to_delete.add(second_file)
-                    to_skip.add(second_file)
-            img2.close()
-        img.close()
-        # print(f"worked file: @{file} {gen[file]}")
+        with Image.open(gen[file]) as img:
+            subgen = gen[file + 1 :]
+            for second_file in subgen:
+                with Image.open(second_file) as img2:
+                    cond2 = img.size == img2.size and img.mode == img2.mode
+                    cond3 = second_file not in to_delete and second_file not in to_skip
+                    if cond2 and cond3:  # if they are the same dimensions
+                        if difference(img, img2):  # if their bytearrays are NOT equal
+                            to_delete.add(second_file)
+                            to_skip.add(second_file)
+        print(f"worked file: @{file} {gen[file]}")
         to_skip.add(file)
 
     if not len(to_delete):
