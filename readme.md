@@ -11,9 +11,21 @@ So here is __5__ simple steps to start:
 1. Install latest _Python_ version.
 2. _*Optional_. Activate virtual enviroment for next steps by using `python -m venv .venv` and then `.venv/Scripts/Activate` or, by other means.
 3. By `pip install -r req.txt` install required python modules.
-4. In terminal use `python ImageSorter.py -[OPTION] ~/path/to/directory`.
+4. In terminal use `python src/ImageSorter.py -[OPTION] ~/path/to/directory`.
 5. To check on all options, either start this script without option, or use -h/--help.
 
+### Help Menu ###
+
+```
+positional arguments:
+  path          Path to directory
+
+options:
+  -h, --help    show this help message and exit
+  -c, --clean   check for every file that has less then HD quality, then delete them
+  -m, --match   match every file to find duplicates and/or broken files, then delete them
+  -r, --rename  rename all files by {0 + number + .file_format} template
+```
 ---
 
 ### Warnings ###
