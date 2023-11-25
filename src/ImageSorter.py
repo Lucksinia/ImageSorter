@@ -2,7 +2,6 @@ from pathlib import Path
 from PIL import Image, ImageFile
 import numpy as np
 import argparse
-from numba import njit
 
 # for specific images, whoose bytes are correct, but one part of data is broken
 ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -40,7 +39,6 @@ def cleaning(path: Path) -> None:
                 filepath.unlink()
 
 
-# @njit
 def difference(baseimg: Image, compared: Image) -> bool:
     """Function to compare difference in data between two images.
 
