@@ -5,9 +5,10 @@ import argparse
 
 # for specific images, whoose bytes are correct, but one part of data is broken
 ImageFile.LOAD_TRUNCATED_IMAGES = True
+# TODO: Redo it in libvips/pyvips library
 
 
-def cleaning(path: Path) -> None:
+def cleaning(path: Path, verbose=False) -> None:
     """Function that finds all files in given directory and prompts to delete them
        if they are at leas HD quality
 
@@ -17,7 +18,9 @@ def cleaning(path: Path) -> None:
     to_save = []
     to_delete = []
     for i, file in enumerate(target_dir.iterdir()):
-        with Image.open(file) as img:  # TODO: find a way to not open images(fully)
+        with Image.open(
+            file
+        ) as img:  # TODO: find a way to not open images(fully) (PNGS need only first 16 bytes?)
             amount = img.size[0] * img.size[1]
             if amount >= 921600:  # minimal HD px amount
                 to_save.append(file)
@@ -54,13 +57,15 @@ def difference(baseimg: Image, compared: Image) -> bool:
         return False
 
 
-def matching(path: Path) -> None:
+def matching(path: Path, verbose=False) -> None:
     """Function that contains matching logic for files.
 
     :param Path path: Path to the worked on directory
     """
+    # TODO: unclog this massive thing
     to_delete = set()  # final set for files that needed to be deleted
     to_skip = set()
+
     gen = list(path.iterdir())
     for file in range(len(gen)):
         with Image.open(gen[file]) as img:
@@ -73,7 +78,7 @@ def matching(path: Path) -> None:
                         if difference(img, img2):  # if their bytearrays are NOT equal
                             to_delete.add(second_file)
                             to_skip.add(second_file)
-        print(f"worked file: @{file} {gen[file]}")
+        print(f"matched file: @{file} {gen[file]}")
         to_skip.add(file)
 
     if not len(to_delete):
@@ -88,7 +93,7 @@ def matching(path: Path) -> None:
                 filepath.unlink()
 
 
-def renaming(path: Path) -> None:
+def renaming(path: Path, verbose=False) -> None:
     """Function that renames all files as a `0 + number of file + file suffix`
 
     :param Path path: Path to the worked on directory
@@ -101,15 +106,17 @@ def renaming(path: Path) -> None:
         new_name[-1] = f"0{i}{suff}"
         new_name = new_name[-1]
         filepath = path.joinpath(new_name)
+        print(f"trying to rename file{file} into {new_name}")
         try:
             file.rename(filepath)
         except:
+            print(f"Failed to rename {file}")
             continue
 
 
 def main():
     """Cli interface for this Sorter"""
-    parser = argparse.ArgumentParser(prog="image-sort")
+    parser = argparse.ArgumentParser()
     parser.add_argument(
         "path",
         type=Path,
@@ -135,6 +142,13 @@ def main():
         action="store_true",
         help="rename all files by {0 + number + .file_format} template",
     )
+    parser.add_argument(
+        "-v",
+        "--verbosity",
+        action="store_true",
+        help="show more verbose output from operations",
+    )
+
     args = parser.parse_args()
     if args.clean:
         cleaning(args.path)
