@@ -9,14 +9,14 @@ As of _"release"_ 0.5.0, there is buggy CLI interface
 So here is __5__ simple steps to start:
 
 1. Install latest _Python_ version.
-2. _*Optional_. Activate virtual enviroment for next steps by using `python -m venv .venv` and then `.venv/Scripts/Activate` or, by other means.
+2. _*Optional_. Activate virtual enviroment for next steps by using `python -m venv .venv` and then `.venv/Scripts/Activate` or, by other means that activates a virtual environment.
 3. By `pip install -r req.txt` install required python modules.
 4. In terminal use `python src/ImageSorter.py -[OPTION] ~/path/to/directory`.
 5. To check on all options, either start this script without option, or use -h/--help.
 
 ### Help Menu ###
 
-```
+```text
 positional arguments:
   path          Path to directory
 
@@ -26,6 +26,7 @@ options:
   -m, --match   match every file to find duplicates and/or broken files, then delete them
   -r, --rename  rename all files by {0 + number + .file_format} template
 ```
+
 ---
 
 ### Warnings ###
@@ -38,7 +39,8 @@ options:
 
 - [x] - basic functionality.
 - [x] - cli Interface.(_partial_)
-- [ ] - further optimizations. ~~(using numpy to compare arrays is not an optimization)~~
+- [x] - Chaining commands with one argument call. (_For Example:_ `py ImageSorter.py -cmr ~/path/to/directory`)
+- [ ] - further optimizations. _~~(using numpy to compare arrays is not an optimization)~~_
 
 ### This project would not have seen the light if not for ###
 

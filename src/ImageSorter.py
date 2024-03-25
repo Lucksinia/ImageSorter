@@ -5,7 +5,7 @@ import argparse
 
 # for specific images, whoose bytes are correct, but one part of data is broken
 ImageFile.LOAD_TRUNCATED_IMAGES = True
-# TODO: Redo it in libvips/pyvips library
+# TODO: Redo it in libvips/pyvips library, probaably
 
 
 def cleaning(path: Path, verbose=False) -> None:
@@ -31,7 +31,7 @@ def cleaning(path: Path, verbose=False) -> None:
         print("There is no files that are not at least HD")
     else:
         print(f"There is {len(to_delete)} files that not at least HD")
-        print("Proseed?(y/n)")
+        print("Proseed to remove?(y/n)")
         if not input("~> ").lower().startswith("y"):
             print("Good bye then!")
             quit()
